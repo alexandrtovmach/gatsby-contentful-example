@@ -1,13 +1,24 @@
 import React from "react"
 
-const Article = ({ content }) => (
+const Article = ({
+  content: {
+    title,
+    text,
+    banner: {
+      file: {
+        url
+      }
+    },
+    publishedAt
+  }
+}) => (
   <div>
-    <h2>{content && content.title}</h2>
-    <img src={content && content.banner && content.banner.file && content.banner.file.url} alt={content && content.title}/>
+    <h2>{title}</h2>
+    <img src={url} alt={title}/>
     <p>
-      {content && content.text && content.text.text}
+      {text}
     </p>
-    <h5>{content && content.publishedAt}</h5>
+    <h5>{publishedAt}</h5>
   </div>
 )
 

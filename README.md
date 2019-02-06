@@ -56,17 +56,19 @@ JAM это всего лишь подход, средств для которо�
 
 <details>
   <summary>Структура моей модели</summary>
-```
-article/
-├── title (Short text)
-├── text (Long text)
-├── banner (Single media)
-└── publishedAt (Date & Time)
 
-person/
-├── fullName (Short text)
-└── avatar (Single media)
-```
+  ```
+  article/
+  ├── title (Short text)
+  ├── text (Long text)
+  ├── banner (Single media)
+  └── publishedAt (Date & Time)
+
+  person/
+  ├── fullName (Short text)
+  └── avatar (Single media)
+  ```
+
 </details>
 
 Далее, используя уже созданные типы данных, добавляем контент. Ничего сложного здесь нет, для текстов можно использовать [SaganIpsum](http://saganipsum.com/) для картинок [Unsplash](https://unsplash.com/search/photos/space).
@@ -89,31 +91,33 @@ cd personal-blog
 
 <details>
   <summary>Структура проекта</summary>
-```
-personal-blog/
-├── gatsby-browser.js
-├── gatsby-config.js
-├── gatsby-node.js
-├── gatsby-ssr.js
-├── LICENSE
-├── node_modules
-├── package.json
-├── README.md
-└── src
-    ├── components
-    │   ├── header.js
-    │   ├── image.js
-    │   ├── layout.css
-    │   ├── layout.js
-    │   └── seo.js
-    ├── images
-    │   ├── gatsby-astronaut.png
-    │   └── gatsby-icon.png
-    └── pages
-        ├── 404.js
-        ├── index.js
-        └── page-2.js
-```
+    
+  ```
+  personal-blog/
+  ├── gatsby-browser.js
+  ├── gatsby-config.js
+  ├── gatsby-node.js
+  ├── gatsby-ssr.js
+  ├── LICENSE
+  ├── node_modules
+  ├── package.json
+  ├── README.md
+  └── src
+      ├── components
+      │   ├── header.js
+      │   ├── image.js
+      │   ├── layout.css
+      │   ├── layout.js
+      │   └── seo.js
+      ├── images
+      │   ├── gatsby-astronaut.png
+      │   └── gatsby-icon.png
+      └── pages
+          ├── 404.js
+          ├── index.js
+          └── page-2.js
+  ```
+
 </details>
 
 ```
@@ -178,44 +182,48 @@ module.exports = {
 
 <details>
   <summary>Пример моих данных</summary>
+
   - contentfulArticle
   - contentfulPerson
   - allContentfulArticle
   - allContentfulPerson
+
 </details>
 
 Используя левую панель построим правильный запрос для наших данных (попробуйте автодополнение, очень удобно).
 
 <details>
   <summary>Пример запрашивающий один экземпляр типа Person и список из Article</summary>
-```
-{
-  contentfulPerson {
-    fullName
-    avatar {
-      file {
-        url
+
+  ```
+  {
+    contentfulPerson {
+      fullName
+      avatar {
+        file {
+          url
+        }
       }
-    }
-  } 
-  allContentfulArticle {
-    edges {
-      node {
-        title
-        text {
-          text
-        }
-        banner {
-          file {
-            url
+    } 
+    allContentfulArticle {
+      edges {
+        node {
+          title
+          text {
+            text
           }
+          banner {
+            file {
+              url
+            }
+          }
+          publishedAt
         }
-        publishedAt
       }
     }
   }
-}
-```
+  ```
+
 </details>
 
 Что можно отметить из структуры запросов:
@@ -227,85 +235,89 @@ module.exports = {
 
 <details>
   <summary>Пример файла _index.js_</summary>
-```
-import React from "react"
-import { StaticQuery, graphql } from "gatsby"
+    
+  ```
+  import React from "react"
+  import { StaticQuery, graphql } from "gatsby"
 
-import Layout from "../components/layout"
-import Article from "../components/article"
+  import Layout from "../components/layout"
+  import Article from "../components/article"
 
-const IndexPage = () => (
-  <Layout>
-    <StaticQuery
-      query={graphql`
-        {
-          allContentfulArticle {
-            edges {
-              node {
-                id
-                title
-                text {
-                  text
-                }
-                banner {
-                  file {
-                    url
+  const IndexPage = () => (
+    <Layout>
+      <StaticQuery
+        query={graphql`
+          {
+            allContentfulArticle {
+              edges {
+                node {
+                  id
+                  title
+                  text {
+                    text
                   }
+                  banner {
+                    file {
+                      url
+                    }
+                  }
+                  publishedAt
                 }
-                publishedAt
               }
             }
           }
-        }
-      `}
-      render={({
-        allContentfulArticle: {
-          edges
-        }
-      }) => (
-        edges.map(({ node }) => (
-          <Article key={node.id} content={node} />
-        ))
-      )}
-    />
-  </Layout>
-)
+        `}
+        render={({
+          allContentfulArticle: {
+            edges
+          }
+        }) => (
+          edges.map(({ node }) => (
+            <Article key={node.id} content={node} />
+          ))
+        )}
+      />
+    </Layout>
+  )
 
-export default IndexPage
-```
+  export default IndexPage
+  ```
+
 </details>
 
 Как это работает? В **query** передается схема запроса _GraphQL_, а в **render** наш любимый JSX. Используйте деструктуризацию  чтобы сделать код более читабельным.
 
 <details>
   <summary>Деструктуризация на примере _components/article.js_</summary>
-```
-import React from "react"
 
-const Article = ({
-  content: {
-    title,
-    text,
-    banner: {
-      file: {
-        url
-      }
-    },
-    publishedAt
-  }
-}) => (
-  <div>
-    <h2>{title}</h2>
-    <img src={url} alt={title}/>
-    <p>
-      {text}
-    </p>
-    <h5>{publishedAt}</h5>
-  </div>
-)
+  ```
+  import React from "react"
 
-export default Article
-```
+  const Article = ({
+    content: {
+      title,
+      text,
+      banner: {
+        file: {
+          url
+        }
+      },
+      publishedAt
+    }
+  }) => (
+    <div>
+      <h2>{title}</h2>
+      <img src={url} alt={title}/>
+      <p>
+        {text}
+      </p>
+      <h5>{publishedAt}</h5>
+    </div>
+  )
+
+  export default Article
+  ```
+
 </details>
 Теперь когда стало ясно как получить и отрендерить данные можно приступать к разработке, но так как эта статья не о том как сделать сайт на реакте, то мы опустим этот момент и представим что сайт готов.
 
@@ -313,20 +325,22 @@ export default Article
 
 <details>
   <summary>для тех кто до сих пор не в курсе как это сделать =)</summary>
-```
-## Находясь в папке с проектом инициализируем пустой репозиторий
-git init
+    
+  ```
+  ## Находясь в папке с проектом инициализируем пустой репозиторий
+  git init
 
-## Сделаем первый коммит
-git add .
-git commit -m “initial commit”
+  ## Сделаем первый коммит
+  git add .
+  git commit -m “initial commit”
 
-## Создаем репозиторий на GitHub и подключаем
-git remote add origin git@github.com:yourname/my-repository-name.git
+  ## Создаем репозиторий на GitHub и подключаем
+  git remote add origin git@github.com:yourname/my-repository-name.git
 
-## Публикуем изменения
-git push origin master
-```
+  ## Публикуем изменения
+  git push origin master
+  ```
+  
 </details>
 
 ### Настраиваем Netlify

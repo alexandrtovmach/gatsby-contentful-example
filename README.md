@@ -135,9 +135,9 @@ npm install gatsby-source-contentful dotenv
 
 Создаем файл _.env_ в корне приложения со следующим содержимым:
 ```
-/* 12-и значный ключ из Contentful -> Settings -> API keys -> Example key 1-> Space ID */
+/* 12-и значный ключ из Contentful → Settings → API keys → Example key 1→ Space ID */
 CONTENTFUL_SPACE_ID=xxxxxxxxxxxx
-/* 64-х значный ключ из Contentful -> Settings -> API keys -> Example key 1-> Content Delivery API - access token */
+/* 64-х значный ключ из Contentful → Settings → API keys → Example key 1→ Content Delivery API - access token */
 CONTENTFUL_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
@@ -173,7 +173,7 @@ module.exports = {
 
 [http://localhost:8000/___graphql](http://localhost:8000/)
 
-Перед нами IDE для _GraphQL_ прямо в браузере. С ним очень удобно строить запросы и тестировать их. Кликните на **Docs** в верхнем правом углу, чтобы развернуть сайдбар с документацией, но сюрприз, это не документация к _GraphQL_, это документация Вашего API. Разверните список **Query**, и Вы увидите все доступные схемы для запросов, с их типами данных.
+Перед нами IDE для _GraphQL_ прямо в браузере. С ним очень удобно строить запросы и тестировать их. Кликните на **Docs** в верхнем правом углу, чтобы развернуть сайдбар с документацией, но сюрприз, это не документация к _GraphQL_, это документация Вашего API. Разверните список **Query** чтобы увидеть все доступные схемы для запросов, с их типами данных.
 
 Интересующие нас схемы имеют примерно следующее название:
 
@@ -193,7 +193,7 @@ module.exports = {
 Используя левую панель построим правильный запрос для наших данных (попробуйте автодополнение, очень удобно).
 
 <details>
-  <summary>Пример запрашивающий один экземпляр типа _Person_ и список из _Article_</summary>
+  <summary>Пример запрашивающий один экземпляр типа Person и список из Article</summary>
 
   ```
   {
@@ -234,7 +234,7 @@ module.exports = {
 Переносим схему запроса в проект и рендерим их как обычные данные в React-приложении. Общепринятым Best Practice считается использование `<StaticQuery />` компонента из пакета [gatsby](https://www.npmjs.com/package/gatsby), который уже установлен в проект.
 
 <details>
-  <summary>Пример файла _index.js_</summary>
+  <summary>Пример файла index.js</summary>
     
   ```
   import React from "react"
@@ -288,7 +288,7 @@ module.exports = {
 Как это работает? В `query` передается схема запроса _GraphQL_, а в `render` наш любимый JSX. Используйте деструктуризацию  чтобы сделать код более читабельным.
 
 <details>
-  <summary>Деструктуризация на примере _components/article.js_</summary>
+  <summary>Деструктуризация на примере components/article.js</summary>
 
   ```
   import React from "react"
@@ -324,7 +324,7 @@ module.exports = {
 Разместим наш проект на GitHub, откуда его можно будет деплоить в следующем шаге.
 
 <details>
-  <summary>для тех кто до сих пор не в курсе как это сделать =)</summary>
+  <summary>Для тех кто до сих пор не в курсе как это сделать</summary>
     
   ```
   ## Находясь в папке с проектом инициализируем пустой репозиторий
@@ -353,11 +353,11 @@ module.exports = {
 
 Осталось добавить хук на обновление контента. Переходим в настройки:  
 
-**Deploy settings -> Build hooks -> Add build hook**
+**Deploy settings → Build hooks → Add build hook**
 
 Устанавливаем любое понятное название, для примера _"Contentful hook"_, выбираем ветку с которой будем делать билд и подтверждаем. Результатом будет ссылка, копируем и идем в панель _Contentful_:  
 
-**Settings -> Webhooks**
+**Settings → Webhooks**
 
 Ищем на правой боковой панели темплейт для _Netlify_ и в два клика связываем две системы. Пробуем изменить контент и смотрим как новые данные появляются на сайте.
 

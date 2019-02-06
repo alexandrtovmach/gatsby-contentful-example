@@ -141,7 +141,7 @@ CONTENTFUL_SPACE_ID=xxxxxxxxxxxx
 CONTENTFUL_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-Расширяем конфигурацию в _gatsby-config.js_
+Расширяем конфигурацию в _gatsby-config.js_:
 ```
 if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
@@ -193,7 +193,7 @@ module.exports = {
 Используя левую панель построим правильный запрос для наших данных (попробуйте автодополнение, очень удобно).
 
 <details>
-  <summary>Пример запрашивающий один экземпляр типа Person и список из Article</summary>
+  <summary>Пример запрашивающий один экземпляр типа _Person_ и список из _Article_</summary>
 
   ```
   {
@@ -227,11 +227,11 @@ module.exports = {
 </details>
 
 Что можно отметить из структуры запросов:
-- чтобы получить URL для файла, нужно обращаться по пути typeName.file.url
-- чтобы получить текст из типа Long text, идем по пути typeName.typeName
-- чтобы получить список экземпляров какого-то типа нужно использовать следующий путь allContentfulName.edges
+- чтобы получить URL для файла, нужно обращаться по пути `typeName.file.url`
+- чтобы получить текст из типа Long text, идем по пути `typeName.typeName`
+- чтобы получить список экземпляров какого-то типа нужно использовать следующий путь `allContentfulName.edges`
 
-Переносим схему запроса в проект и рендерим их как обычные данные в React-приложении. Общепринятым Best Practice считается использование `<StaticQuery />` компонента из пакета “gatsby” для этих целей.
+Переносим схему запроса в проект и рендерим их как обычные данные в React-приложении. Общепринятым Best Practice считается использование `<StaticQuery />` компонента из пакета [gatsby](https://www.npmjs.com/package/gatsby), который уже установлен в проект.
 
 <details>
   <summary>Пример файла _index.js_</summary>
@@ -285,7 +285,7 @@ module.exports = {
 
 </details>
 
-Как это работает? В **query** передается схема запроса _GraphQL_, а в **render** наш любимый JSX. Используйте деструктуризацию  чтобы сделать код более читабельным.
+Как это работает? В `query` передается схема запроса _GraphQL_, а в `render` наш любимый JSX. Используйте деструктуризацию  чтобы сделать код более читабельным.
 
 <details>
   <summary>Деструктуризация на примере _components/article.js_</summary>
